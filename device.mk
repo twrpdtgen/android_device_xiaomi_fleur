@@ -6,7 +6,11 @@
 #
 
 # Device path
-LOCAL_PATH := device/xiaomi/fleur
+DEVICE_PATH := device/xiaomi/fleur
+
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    $(DEVICE_PATH)
 
 # Virtual A/B
 ENABLE_VIRTUAL_AB := true
