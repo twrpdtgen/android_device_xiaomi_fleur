@@ -17,6 +17,7 @@
 #
 
 DEVICE_PATH := device/xiaomi/fleur
+PREBUILT_PATH := $(DEVICE_PATH)/prebuilt
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
