@@ -1,0 +1,4 @@
+service vibrator-fleur /vendor/bin/hw/android.hardware.vibrator-service.fleur
+    class hal
+    user root
+    group root

@@ -51,7 +51,11 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-mtkimpl
 
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.3-service.mtk.recovery
+    android.hardware.vibrator-service.fleur
+
+# Copy the vibrator into recovery image
+PRODUCT_COPY_FILE += \
+    $(OUT_DIR)/target/product/fleur/system/bin/hw/android.hardware.vibrator-service.fleur:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/hw/android.hardware.vibrator-service.fleur
 
 PRODUCT_PACKAGES += \
     bootctrl
