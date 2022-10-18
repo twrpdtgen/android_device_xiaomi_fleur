@@ -5,12 +5,35 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Device path
 LOCAL_PATH := device/xiaomi/fleur
+
+# Virtual A/B
+ENABLE_VIRTUAL_AB := true
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+
+# Dynamic Partition
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
+# VNDK
+PRODUCT_TARGET_VNDK_VERSION := 31
+PRODUCT_SHIPPING_API_LEVEL := 30
+
 # A/B
+AB_OTA_UPDATER := true
+TW_INCLUDE_REPACKTOOLS := true
+
 AB_OTA_PARTITIONS += \
     boot \
+    dtbo \
     system \
-    vendor
+    system_ext \
+    product \
+    vendor \
+    odm \
+    vbmeta \
+    vbmeta_system \
+    vendor_boot
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
@@ -20,11 +43,13 @@ AB_OTA_POSTINSTALL_CONFIG += \
 
 # Boot control HAL
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0-impl \
-    android.hardware.boot@1.0-service
+    android.hardware.boot@1.2-mtkimpl.recovery
 
 PRODUCT_PACKAGES += \
-    bootctrl.mt6781
+    android.hardware.vibrator@1.3-service.mtk.recovery
+
+PRODUCT_PACKAGES += \
+    bootctrl
 
 PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     bootctrl.mt6781 \
@@ -38,3 +63,20 @@ PRODUCT_PACKAGES += \
     update_engine \
     update_verifier \
     update_engine_sideload
+
+# Health Hal
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-service
+
+# Fastbootd
+PRODUCT_PACKAGES += \
+    android.hardware.fastboot@1.0-impl-mock \
+    fastbootd
+
+# MTK PlPath Utils
+PRODUCT_PACKAGES += \
+    mtk_plpath_utils.recovery
+
+PRODUCT_PACKAGES_DEBUG += \
+    update_engine_client
